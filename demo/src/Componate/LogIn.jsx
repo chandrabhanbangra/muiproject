@@ -8,7 +8,7 @@ import {
   Button,
   Typography,
   Divider,
-
+  Box
 } from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
@@ -19,9 +19,17 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import { Link } from "react-router-dom";
+import styled from "@emotion/styled";
 
 
 function LogIn() {
+
+  const LoginText = styled(Typography)`
+  font-size: calc(10px + 2vw);
+  background: -webkit-linear-gradient(blue, yellow);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  `
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -31,16 +39,18 @@ function LogIn() {
   };
   return (
     <>
-      <Container sx={{ marginTop: "100px" }}>
-        <Paper sx={{ maxWidth: "1200px", minWidth: "280px", height: "50vh" }}>
-          <Toolbar sx={{ display: "flex", flexDirection: "column" }}>
-            <Typography variant="h4">LOGIN</Typography>
+      <Container fullwidth={true}  sx={{marginTop: "100px", }}>
+        <Box sx={{display:"flex", justifyContent:"center",   }}>
+        <Paper sx={{ width:{xs:"95%" ,sm:"50%"},  minHeight: {xs:"420px",sm:"520px"} }} elevation={4}>
+          <Toolbar sx={{ display: "flex", flexDirection: "column" ,marginTop:"40px"}}>
+            <LoginText>LOGIN</LoginText>
             <TextField
               fullWidth
               sx={{
-                maxWidth: "400px",
-                minWidth: "200px",
+                maxWidth: "500px",
+                minWidth: "100px",
                 marginBottom: "20px",
+                marginTop:"14px"
               }}
               placeholder="user name"
               variant="outlined"
@@ -54,7 +64,7 @@ function LogIn() {
             ></TextField>
             <OutlinedInput
               fullWidth
-              sx={{ maxWidth: "400px", minWidth: "200px" }}
+              sx={{ maxWidth: "500px", minWidth: "100px" }}
               placeholder="Password"
               id="filled-adornment-password"
               type={showPassword ? "text" : "password"}
@@ -88,7 +98,7 @@ function LogIn() {
             
           </Toolbar>
           <Toolbar sx={{justifyContent:"center"}}>
-          <Divider variant="middle"  sx={{width:"300px"}}>Login with Others</Divider>
+          <Divider variant="middle"  sx={{width:{xs:"150px", lg:"300px"}}}>Login with Others</Divider>
           </Toolbar>
          <Toolbar sx={{justifyContent:"center", gap:"10px",}} >
               <GoogleIcon color="primary" sx={{width:"40px",height:"40px"}}/>
@@ -96,6 +106,7 @@ function LogIn() {
          </Toolbar>
           
         </Paper>
+        </Box>
       </Container>
     </>
   );
