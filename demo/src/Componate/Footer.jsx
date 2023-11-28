@@ -22,13 +22,13 @@ function Footer() {
     <Box sx={{marginTop:"30px", justifyContent:"center"}}  >
       <Stack sx={{bgcolor:"#1976d2", color:"white", display:"flex", justifyContent:"space-between", flexDirection:"row"}}>
         <Toolbar>
-        <Typography variant="h6">Get connected with us on social networks: </Typography>
+        <Typography variant="h6" sx={{fontSize:"calc(7px + 1vw)"}}>Get connected with us on social networks: </Typography>
         </Toolbar>
         <Toolbar>
-         <FacebookIcon/>
-         <InstagramIcon/>
-         <TwitterIcon/>
-         <PinterestIcon/>
+         <FacebookIcon sx={{padding:'5px'}}/>
+         <InstagramIcon sx={{padding:'5px'}}/>
+         <TwitterIcon sx={{padding:'5px'}}/>
+         <PinterestIcon sx={{padding:'5px'}}/>
         </Toolbar>
       </Stack>
       <Grid container

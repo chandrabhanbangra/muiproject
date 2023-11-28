@@ -12,7 +12,7 @@ import OderConform from "./Componate/OderConform"
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ItemPage from "./Componate/ItemPage";
 import LogIn from "./Componate/LogIn";
-
+import Wishlist from "./Componate/Wishlist";
 
 function App() {
   return (
@@ -28,6 +28,7 @@ function App() {
         
         <Route path="/ItemPage/:id" element={<ItemPage/>}/>
         <Route path="/OderConform" element={<OderConform/>}/>
+        <Route path="/whishlist" element={<Wishlist/>}/>
         </Route>
     </Routes>
     </BrowserRouter>

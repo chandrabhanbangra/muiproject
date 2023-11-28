@@ -11,22 +11,27 @@ import {
   IconButton,
 } from "@mui/material";
 import logo from "../assets/react.svg";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Outlet, Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import Home from "./Home";
 import Products from "./Products";
 import Footer from "./Footer";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Badge from "@mui/material/Badge";
 
-const Navbar = () => {
+
+const Navbar = (props) => {
   // const moblieMenuHandeler = () => {
   //   setNavMenu(ture);
   // };
-
+  const [width, setWidth] = useState()
+  const [navMenu, setNavMenu] = useState(false);
   const closeHandler = () => {
     setNavMenu(false);
   };
-  const [navMenu, setNavMenu] = useState(false);
+  
+  
   return (
     <>
       <Container>
@@ -45,19 +50,22 @@ const Navbar = () => {
                 }}
               >
                 <Link to="/" color="palette.primary.light" underline="none">
-                  Home{" "}
+                  Home
                 </Link>
                 <Link
                   to="/products"
                   color="palette.secondary.dark"
                   underline="none"
                 >
-                  Products{" "}
+                  Products
                 </Link>
                 <Link to="/about" color="#fafafa" underline="none">
-                  {" "}
-                  About{" "}
+                 
+                  About
                 </Link>
+                <Badge badgeContent={props.wishlistCount}>
+                <Button to="/whishlist" component={Link} ><FavoriteIcon color="error"/></Button>
+                </Badge>
               </Toolbar>
             </Toolbar>
             <IconButton
@@ -82,7 +90,7 @@ const Navbar = () => {
 
             <Toolbar
               sx={{
-                display: "flex",
+                display: {xs:"flex", lg:"none", },
                 flexDirection: "column",
                 position: "absolute",
                 top: "100px",
