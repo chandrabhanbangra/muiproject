@@ -25,12 +25,16 @@ const Navbar = (props) => {
   // const moblieMenuHandeler = () => {
   //   setNavMenu(ture);
   // };
-  const [width, setWidth] = useState()
+  const [wishlistClick, setWishlistClick] = useState()
   const [navMenu, setNavMenu] = useState(false);
   const closeHandler = () => {
     setNavMenu(false);
   };
   
+  const callback =(childdata)=>{
+    handleCallback(childdata)
+    console.log(childdata)
+  }
   
   return (
     <>
