@@ -4,6 +4,7 @@ import {
   CardMedia,
   Container,
   Grid,
+  Paper,
   Stack,
   TextField,
   ThemeProvider,
@@ -24,32 +25,35 @@ import CartButton from "./cartButton";
 import { orange, yellow } from "@mui/material/colors";
 import ItemsContext from "../Context/ItemsContext";
 // import ItemsContext from "../Context/ItemsContext";
+import "./Itempage.css"
 
 const ItemPage = () => {
   const { id } = useParams();
   
-  const [addToCartValue, setAddToCartValue] = useState(ItemsContext);
- 
+const [addToCartValue, setAddToCartValue] = useState(0);
 
-  const [itemDetails, setItemdetails] = useState([]);
-  const [imgstore, setImgStore] = useState("");
+const [itemDetails, setItemdetails] = useState([]);
+const [imgstore, setImgStore] = useState("");
   
-  React.useEffect(() => {
-    axios.get(`https://dummyjson.com/product/${id}`).then((response) => {
-      setItemdetails({ ...response.data });
+React.useEffect(() => {
+  axios.get(`https://dummyjson.com/product/${id}`).then((response) => {
+    setItemdetails({ ...response.data });
     });
   }, [id]);
 
-  //Add to cart
+//Add to cart
 
-  const inputValuechangeHandler = () => {
+const inputValuechangeHandler = () => {
     return setAddToCartValue();
-  };
+};
   const decreaseHandler = () => {
-    if (addToCartValue == 0) {
-    } else {
+    if(addToCartValue == 0){
+
+    }else{
       setAddToCartValue(addToCartValue - 1);
     }
+      
+    
   };
   const increaseHandler = () => {
     return setAddToCartValue(addToCartValue + 1);
@@ -68,7 +72,7 @@ const ItemPage = () => {
       imageArray.push(itemImage);
       return (
         <CardMedia
-          sx={{ width: "100px", padding: "8px" }}
+          sx={{ padding:"10px",width:"100px",height:"100px",  }}
           height="90px"
           component="img"
           key={index}
@@ -91,7 +95,7 @@ const ItemPage = () => {
       },
     },
   });
-
+  
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1200 },
@@ -100,12 +104,12 @@ const ItemPage = () => {
     },
     tablet: {
       breakpoint: { max: 1800, min: 600 },
-      items: 4,
+      items: 3,
       slidesToSlide: 1,
     },
     mobile: {
-      breakpoint: { max: 600, min: 400 },
-      items: 3,
+      breakpoint: { max: 599, min: 100 },
+      items: 1,
       slidesToSlide: 1,
     },
   };
@@ -118,45 +122,37 @@ const ItemPage = () => {
   };
 
   return (
-    <Grid
-      container
+    <Grid 
+      container xs={12} sm={12} lg={12}
       justifyContent={"center"}
-      sx={{ marginTop: "60px", paddingX: "90px" }}
+      sx={{ marginTop: "100px", paddingRight:"30px", gap:{lg:"0px",xs:"70px"}  }}
     >
-      <Grid item lg={5}>
-        <Stack
-          sx={{
-            width: "500px",
-            px: "10px",
-            height: "500px",
-            border: "8px solid red",
-            borderRadius: "30px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+      <Grid item xs={10} sm={5} sx={{}}  >
+        <Stack sx={{width:{xs:"100%",lg:"100%", }}}>
+        <Paper elevation={2} sx={{width:{xs:"100%",lg:"80%", padding:"20px"},maxHeight:"500px", minHeight:"300px"}}>
           <CardMedia
             onMouseMove={zoomimg}
-            sx={{ width: { zoom }, overflow: "auto" }}
-            height="460px"
+            sx={{ width:{xs:"100%", lg:"100%"},maxHeight:"500px", minHeight:"300px", overflow: "auto" }}
+            height="70%"
             component="img"
             image={imageArray[imgstore] ? imageArray[imgstore] : imageArray[0]}
           />
-        </Stack>
-        <Stack sx={{ width: "500px" }}>
+        </Paper>
+        <Stack sx={{maxWidth:"450px", minWidth:"100px" }}>
           <Carousel
+            className="itemcaruosel"
+            partialVisible={false}
             responsive={responsive}
             autoPlay={false}
             IndicatorIcon={false}
-            navButtonsAlwaysInvisible={true}
-          >
+            navButtonsAlwaysInvisible={true}>
             {itemImages}
+          
           </Carousel>
         </Stack>
-        <Toolbar></Toolbar>
+        </Stack>
       </Grid>
-      <Grid item lg={7}>
+      <Grid item xs={10}  sm={5} >
         <Stack>
           <Typography variant="h5">{itemDetails.title}</Typography>
           <Typography variant="h5">
@@ -166,12 +162,12 @@ const ItemPage = () => {
           <Toolbar sx={{ gap: "20px" }}>
             <Typography variant="h5">Price $ {itemDetails.price} </Typography>
             <Typography variant="h5" color="error">
-              {" "}
+             
               {itemDetails.discountPercentage}% off
             </Typography>
           </Toolbar>
           <Typography variant="body1">
-            {" "}
+            
             <LocalOfferIcon color="error" />
             Bank Offer10% Instant Discount on SBI Credit Card Txns, up to ₹1000,
             on orders of ₹5,000 and above
@@ -206,13 +202,12 @@ const ItemPage = () => {
           </Toolbar>
           <Toolbar sx={{ gap: "15px" }}>
             <Button variant="contained" size="large">
-              {" "}
+             
               ADD TO CART
             </Button>
             <Link to="/OderConform">
-              {" "}
+              
               <Button variant="contained" size="large" onClick={qtyHandler}>
-                {" "}
                 BUY NOW
               </Button>
             </Link>
